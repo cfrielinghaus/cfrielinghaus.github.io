@@ -1,64 +1,43 @@
-body{
-    padding:0px;
-    margin: 0px;
-    background-color: #1E1E24;
-    text-align: center;
-}
-.banner{
-    background-image:url(https://www.noesnest.com/wp-content/uploads/sites/14/2020/03/san-francisco-at-night.jpg);
-    height: 200px;
-    background-position: bottom center;
-}
-h1{
-    color:#ffffff;
+:root {
+    --primary-color: rgb(0, 0, 0);
+    --secondary-color: #0d1125;
+  }
+  
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: rgb(214, 188, 69);
+  }
+  
+  header img {
+    height: 50px;
+    width: auto;
+  }
+  
+  header h1 {
+    font-size: 2rem;
+    margin: 0;
     font-family: 'Ruda', sans-serif;
-    font-size: 70px;
     font-weight: 900;
-    margin: 0px;
     padding-top: 20px;
     text-align: center;
     text-transform: uppercase;
-}
-h2{
-    color: #ffffff;
-    font-family: 'Catamaran',sans-serif;
-    margin: 0px;
-    text-align: left;
-}
-h3{
-    color: #D7263D;
-    font-family: 'Ruda',sans-serif;
-    font-size: 32px;
-    margin: 0px;
-    position: relative;
-    text-align: left;
-    text-transform: uppercase;
-}
-p{
-    color: rgba(255,255,255,0.75);
-    font-family: 'Pontano Sans',sans-serif;
-    margin: 0px;
-    text-align: left;
-}
-.map{
-    border: 1px solid #ffffff;
-    margin: 60px auto;
-    padding: 10px 0px 0px 0px;
-    width: 90%;
-}
-.map-img{
-    display: inline-block;
-    margin-top: 20px;
-}
-.map-description{
-    display: inline-block;
-    width: 70%;
-}
-.enter{
-    margin-top: 30px;
-    width: 100%;
-}
-a{
+
+  }
+  
+  header p {
+    font-size: 1rem;
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
     background-color: #D7263D;
     color: #ffffff;
     display: block;
@@ -66,17 +45,108 @@ a{
     font-size: 16px;
     padding: 14px;
     text-align: center;
-    text-decoration: none;
     text-transform: uppercase;
-}
-ul{
-    padding: 0px;
-    margin: 10px 0px;
-}
-li{
-    margin:0px;
+  }
+  
+  a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+  }
+  
+  main {
+    height: calc(100vh - 150px);
+    width: 100%;
+  }
+  
+  #map {
+    height: 100%;
+    width: 100%;
+  }
+  
+  footer {
+    background-color: var(--secondary-color);
+    color: rgb(194, 125, 60);
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+  
+  footer ul {
     list-style: none;
-}
-.breadcrumb a {
-    background-color: inherit;
-}
+    display: flex;
+    align-items: center;
+    margin: 0;
+  }
+  
+  footer li {
+    margin-right: 1rem;
+  }
+  
+  @media only screen and (max-width: 768px) {
+    header h1 {
+      font-size: 1.5rem;
+    }
+  
+    header p {
+      font-size: 0.8rem;
+    }
+  
+    footer {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    footer ul {
+      justify-content: center;
+      margin-bottom: 0.5rem;
+    }
+  }
+  
+  .marker-content {
+    background-color: rgb(0, 0, 0);
+    color: black;
+    padding: 0.5rem;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(78, 77, 77, 0.3);
+  }
+  
+  .marker-content h2 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+  
+  .marker-content p {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+    footer p {
+        margin-top: 0.5rem;
+        }
+        
+        @media only screen and (min-width: 769px) {
+        footer ul {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        align-items: center;
+        }
+        
+        footer li {
+        margin-right: 0;
+        }
+        
+        footer p {
+        margin-top: 0;
+        }
+        }
+        
+        .marker-content {
+        display: none;
+        }
+        
+        .marker:hover .marker-content {
+        display: block;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        z-index: 100;
+        }

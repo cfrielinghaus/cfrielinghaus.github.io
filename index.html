@@ -1,53 +1,32 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>CrimeEye</title>
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100|Pontano+Sans|Ruda:900" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" type="image/x-icon" href="eye.ico">
+</head>
+<body>
+  <header>
+    <img src="https://images.vexels.com/media/users/3/142874/isolated/preview/7db99d46d3568fe5b985e529b133cddb-eye-magnifying-glass-icon.png alt="CrimeEye Logo">
+    <h1>CrimeEye</h1>
+    <p>Your Ultimate Crime Map</p>
+  </header>
 
-    <head>
+  <main>
+    <div id="map"></div>
+  </main>
 
-        <title>CrimeEye</title>
+  <footer>
+    <ul>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Privacy Policy</a></li>
+    </ul>
+    <p>&copy; 2023 CrimeEye. All rights reserved.</p>
+  </footer>
 
-        <link href="https://fonts.googleapis.com/css?family=Catamaran:100|Pontano+Sans|Ruda:900" rel="stylesheet">
-        
-        <link rel="stylesheet" type="text/css" href="./style.css">
-        <link rel="stylesheet:" type="text/css" href="./breadcrumb.css">
-
-    </head>
-
-    <body>
-        <div class="banner">
-            <h1>CrimeEye: Crime Tracking Network</h1>
-        </div>
-        <ul class="breadcrumb">
-            <li class="location"><a href="">...</a></li>
-            <li class="location"><a href="">Map</a></li>
-            <li class="attribute"><a href="">Locations</a></li>
-        </ul>
-        <div class="map">
-            <div class="map-img">
-                <img src="https://cdn.britannica.com/80/149180-050-23E41CF0/topographic-map.jpg">
-            </div>
-
-            <div class="map-description">
-                <ul>
-                    <li>
-                        <h2>Bay Area</h2>
-                    </li>
-                    <li>
-                        <h3>San Francisco</h3>
-                    </li>
-                    <li>
-                        <p>San Francisco is a vibrant and diverse city located on the west coast of the 
-United States in California.
-                        The city's scenic waterfront, eclectic neighborhoods, and mild Mediterranean climate make it a popular destination
-for visitors from around the world.
-                        San Francisco is home to a thriving tech industry and a bustling tourism scene,
-with a variety of museums, galleries, restaurants, and entertainment venues.</p>
-                    </li>
-                </ul>
-            </div>
-            <div class="enter">
-                <a href="#">Enter Now</a>
-            </div>
-        </div>
-    </body>
-
+  <script src="maps.js"></script>
+</body>
 </html>
