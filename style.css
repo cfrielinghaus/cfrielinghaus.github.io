@@ -6,7 +6,7 @@
   header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 1rem;
     background-color: var(--primary-color);
     color: rgb(214, 188, 69);
@@ -37,7 +37,7 @@
     color: var(--secondary-color);
     text-decoration: none;
     transition: color 0.2s ease-in-out;
-    background-color: #D7263D;
+    background-color: rgb(214, 188, 69);
     color: #ffffff;
     display: block;
     font-family: 'Pontano Sans',sans-serif;
