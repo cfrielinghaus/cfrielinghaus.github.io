@@ -1,5 +1,5 @@
 :root {
-    --primary-color: #0098db;
+    --primary-color: rgb(214, 188, 69);
     --secondary-color: #0d1125;
   }
   
@@ -9,7 +9,7 @@
     justify-content: space-between;
     padding: 1rem;
     background-color: var(--primary-color);
-    color: white;
+    color: rgb(214, 188, 69);
   }
   
   header img {
@@ -51,7 +51,7 @@
   
   footer {
     background-color: var(--secondary-color);
-    color: white;
+    color: rgb(194, 125, 60);
     display: flex;
     justify-content: space-between;
     padding: 1rem;
@@ -89,11 +89,11 @@
   }
   
   .marker-content {
-    background-color: white;
+    background-color: rgb(0, 0, 0);
     color: black;
     padding: 0.5rem;
     border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 5px rgba(78, 77, 77, 0.3);
   }
   
   .marker-content h2 {
