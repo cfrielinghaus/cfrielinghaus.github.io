@@ -20,6 +20,12 @@
   header h1 {
     font-size: 2rem;
     margin: 0;
+    font-family: 'Ruda', sans-serif;
+    font-weight: 900;
+    padding-top: 20px;
+    text-align: center;
+    text-transform: uppercase;
+
   }
   
   header p {
@@ -32,6 +38,14 @@
     color: var(--secondary-color);
     text-decoration: none;
     transition: color 0.2s ease-in-out;
+    background-color: #D7263D;
+    color: #ffffff;
+    display: block;
+    font-family: 'Pontano Sans',sans-serif;
+    font-size: 16px;
+    padding: 14px;
+    text-align: center;
+    text-transform: uppercase;
   }
   
   a:hover {
