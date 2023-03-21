@@ -1,0 +1,19 @@
+.grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50px;
+    grid-row-gap: 10px;
+    grid-column-gap: 0px;
+    border: 0px;
+    height: 500px;
+    width: 500px;
+
+}
+
+.box {
+    color: black;
+    
+}
+
+
+}
