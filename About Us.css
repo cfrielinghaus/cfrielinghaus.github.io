@@ -1,7 +1,7 @@
 main {
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows:  ;
+    grid-template-rows: 10% 5% 40% 15% 5%;
     grid-row-gap: 10px;
     grid-column-gap: 0px;
     margin-top: 50px;
