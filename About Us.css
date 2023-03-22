@@ -1,19 +1,47 @@
-.grid {
+main {
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: 50px;
+    grid-template-rows:  ;
     grid-row-gap: 10px;
     grid-column-gap: 0px;
+    margin-top: 50px;
     border: 0px;
     height: 500px;
     width: 500px;
-
 }
+
+h1 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: large;
+    font-weight: 800;
+    letter-spacing: normal;
+    text-align: center;
+    color: lightslategray;
+    padding: 20px 0px 10px 10px;
+}
+
+h2 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    letter-spacing: 0.2px;
+    text-align: center;
+    color:black;
+    padding: 10px 0px 50px 50px;
+}
+
+picture {
+    width: fit-content;
+    height: auto;
+}
+
+
 
 .box {
-    color: black;
-    
+    color: black;    
 }
-
-
+.right {
+    grid-column-start: 1;
+    grid-column-end: 2
+    ;
 }
