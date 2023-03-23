@@ -1,4 +1,18 @@
+.header {
+    height: 100px;
+    background-color: burlywood;
+    padding: 20px;
+    border-bottom: 1px solid burlywood;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: start;
+    justify-content: space-around;
+}
+
 main {
+
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-rows: 10% 5% 40% 15% 5%;
@@ -31,8 +45,8 @@ h2 {
 }
 
 picture {
-    width: fit-content;
-    height: auto;
+    width: 500px;
+    height: 600px;
 }
 
 
