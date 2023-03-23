@@ -1,4 +1,4 @@
-.header {
+header {
     height: 100px;
     background-color: burlywood;
     padding: 20px;
@@ -14,7 +14,7 @@
 main {
 
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 960px 960px;
     grid-template-rows: 10% 5% 40% 15% 5%;
     grid-row-gap: 10px;
     grid-column-gap: 0px;
@@ -26,7 +26,7 @@ main {
 
 h1 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: large;
+    font-size: xx-large;
     font-weight: 800;
     letter-spacing: normal;
     text-align: center;
