@@ -24,6 +24,20 @@ main {
     width: 500px;
 }
 
+a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+    background-color: rgb(214, 188, 69);
+    color: #ffffff;
+    display: block;
+    font-family: 'Pontano Sans',sans-serif;
+    font-size: 24px;
+    padding: 14px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
 h1 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: xx-large;
