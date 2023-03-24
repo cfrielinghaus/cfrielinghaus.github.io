@@ -3,12 +3,22 @@
     --secondary-color: #0d1125;
   }
   
-  header {
-    background-color: var(--secondary-color);
-    color: rgb(194, 125, 60);
+  footer {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: space-around;
     padding: 1rem;
+    background-color: var(--primary-color);
+    color: rgb(214, 188, 69);
+  }
+  
+  footer p {
+    font-size: 2rem;
+    margin: 0;
+    font-family: 'Ruda', sans-serif;
+    font-weight: 900;
+    padding-top: 20px;
+    text-align: center;
   }
   
   a {
@@ -30,6 +40,24 @@
     text-decoration: underline;
   }
   
+  main {
+    height: calc(100vh - 150px);
+    width: 100%;
+  }
+  
+  #map {
+    height: 100%;
+    width: 100%;
+  }
+  
+  header {
+    background-color: var(--secondary-color);
+    color: rgb(194, 125, 60);
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+  
   header ul {
     list-style: none;
     display: flex;
@@ -42,7 +70,12 @@
   }
   
   @media only screen and (max-width: 768px) {
-
+    footer h1 {
+      font-size: 1.5rem;
+    }
+  
+    footer p {
+      font-size: 0.8rem;
     }
   
     header {
@@ -54,7 +87,8 @@
       justify-content: center;
       margin-bottom: 0.5rem;
     }
-
+  }
+  
   .marker-content {
     background-color: rgb(0, 0, 0);
     color: black;
