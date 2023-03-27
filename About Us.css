@@ -31,7 +31,7 @@
     @media only screen and (min-width: 769px) {
     header ul {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     align-items: center;
     }
     
@@ -64,8 +64,8 @@
     color: #ffffff;
     display: block;
     font-family: 'Pontano Sans',sans-serif;
-    font-size: 16px;
-    padding: 14px;
+    font-size: 32px;
+    padding: 28px;
     text-align: center;
     text-transform: uppercase;
   }
@@ -94,7 +94,7 @@
   }
   
   footer p {
-    font-size: 2rem;
+    font-size: .5rem;
     margin: 0;
     font-family: 'Ruda', sans-serif;
     font-weight: 900;
@@ -118,7 +118,7 @@
     }
   
     footer p {
-      font-size: 0.8rem;
+      font-size: 0.25rem;
     }
   }
   
