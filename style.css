@@ -4,7 +4,8 @@ body {
 }
 
 .background {
-	background-image: url('nea2.png');
+	background-image: url('../Capstone-Project/images/nea2.png');
+	background-repeat: no-repeat;
 	background-size: cover;
 	height: 100vh;
 	display: flex;
