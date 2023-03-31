@@ -1,141 +1,128 @@
-:root {
-    --primary-color: rgb(0, 0, 0);
-    --secondary-color: #0d1125;
-  }
-    
-  header {
-    display: flex;
-    align-items: center;
-    background-color: var(--primary-color);
-    color: rgb(194, 125, 60);
-    display: flex;
-    justify-content: space-around;
-    padding: 1rem;
-  }
-  
-  header ul {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    margin: 0;
-  }
-  
-  header li {
-    margin-right: 1rem;
-  }
+body {
+  background: linear-gradient(to bottom, #1c2331, #462a6a);
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  margin: 0;
+}
 
-  header p {
-    margin-top: 0.5rem;
-    }
-    
-    @media only screen and (min-width: 769px) {
-    header ul {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    align-items: center;
-    }
-    
-    header li {
-    margin-right: 0;
-    }
-    
-    header p {
-    margin-top: 0;
-    }
-    }
-    
-    .marker-content {
-    display: none;
-    }
-    
-    .marker:hover .marker-content {
-    display: block;
-    position: absolute;
-    top: 50px;
-    left: 0;
-    z-index: 100;
-    }
+.banner {
+  display: flex;
+  white-space: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #292946;
+  height: 100px;
+  padding: 0 50px;
+}
 
-  a {
-    color: var(--secondary-color);
-    text-decoration: none;
-    transition: color 0.2s ease-in-out;
-    background-color: rgb(214, 188, 69);
-    color: #ffffff;
-    display: block;
-    font-family: 'Pontano Sans',sans-serif;
-    font-size: 32px;
-    padding: 28px;
-    text-align: center;
-    text-transform: uppercase;
-  }
-  
-  a:hover {
-    color: var(--primary-color);
-    text-decoration: underline;
-  }
-  
-  main {
-    height: calc(100vh - 150px);
-    width: 100%;
-  }
-  
-  #map {
-    height: 100%;
-    width: 100%;
-  }
+.banner-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 100%;
+}
 
-  footer {
-    background-color: var(--secondary-color);
-    color: rgb(194, 125, 60);
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-  }
-  
-  footer p {
-    font-size: .5rem;
-    margin: 0;
-    font-family: 'Ruda', sans-serif;
-    font-weight: 900;
-    padding-top: 20px;
-    text-align: center;
-  }
-  
-  @media only screen and (max-width: 768px) {
-    header {
-        flex-direction: column;
-        text-align: center;
-      }
-    
-      header ul {
-        justify-content: center;
-        margin-bottom: 0.5rem;
-      }
+.banner-link {
+  font-size: 24px;
+  color: #FFFFFF;
+  text-decoration: none;
+  margin: 0 20px;
+}
 
-    footer h1 {
-      font-size: 1.5rem;
-    }
-  
-    footer p {
-      font-size: 0.25rem;
-    }
-  }
-  
-  .marker-content {
-    background-color: rgb(0, 0, 0);
-    color: black;
-    padding: 0.5rem;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(78, 77, 77, 0.3);
-  }
-  
-  .marker-content h2 {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-  }
-  
-  .marker-content p {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-  }
+.banner-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.banner-logo img {
+  height: 80%;
+}
+
+
+.logo img {
+  width: 100%;
+  max-width: 200px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav li {
+  margin-left: 30px;
+}
+
+nav a {
+  color: #b6b6b6;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+
+.about {
+  width: 50%;
+  text-align: center;
+}
+
+.about h1 {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.about p {
+  font-size: 32px;
+  line-height: 1.6;
+  text-align: justify;
+  margin-left: 30px;
+}
+
+.about img {
+  width: 80%;
+  max-width: 200px;
+  margin-top: 30px;
+}
+
+.signature {
+  display: block;
+  width: 150px;
+  margin: 30px auto;
+}
+
+.small-logo {
+  width: 50px;
+  margin-top: 30px;
+}
+
+
+.image-container {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
