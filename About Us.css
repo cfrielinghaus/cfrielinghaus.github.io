@@ -8,67 +8,34 @@ body {
 
 .banner {
   display: flex;
-  white-space: nowrap;
   justify-content: space-around;
   align-items: center;
-  background-color: #292946;
-  height: 100px;
-  padding: 0 50px;
+  background: linear-gradient(to bottom right, #292d3e, #746fb0);
+  height: 80px;
+}
+
+.banner-logo {
+  display: flex;
+  align-items: center;
+}
+
+.banner-logo img {
+  height: 50px;
+  margin-right: 10px;
 }
 
 .banner-links {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 200px;
-  height: 100%;
+  width: 40%;
 }
 
-.banner-link {
-  font-size: 24px;
-  color: #FFFFFF;
-  text-decoration: none;
-  margin: 0 20px;
-}
-
-.banner-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
-.banner-logo img {
-  height: 80%;
-}
-
-
-.logo img {
-  width: 100%;
-  max-width: 200px;
-}
-
-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-nav li {
-  margin-left: 30px;
-}
-
-nav a {
-  color: #b6b6b6;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 16px;
-  transition: color 0.3s ease;
-}
-
-nav a:hover {
+.banner-links a {
   color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 main {

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>About Us | CrimeEye</title>
+  <title>Contact Us | CrimeEye</title>
   <link rel="stylesheet" href="Contact Us.css">
 </head>
 <body>
@@ -21,32 +21,28 @@
         </div>
     </div>      
   </header>
-
-    <!-- Contact Form -->
-    <main>
-      <div class="contact-container">
-        <h1>Contact Us</h1>
-        <p class="contact-blurb">Have any questions? Let us know and we'll be sure to get back to you!</p>
-      </div>      
-      <form action="#" method="POST">
-        <div class="form-row">
-          <label for="first-name">First Name*</label>
-          <input type="text" id="first-name" name="first-name" required />
-        </div>
-        <div class="form-row">
-          <label for="last-name">Last Name*</label>
-          <input type="text" id="last-name" name="last-name" required />
-        </div>
-        <div class="form-row">
-          <label for="email">Email*</label>
-          <input type="email" id="email" name="email" required />
-        </div>
-        <div class="form-row">
-          <label for="message">Message*</label>
-          <textarea id="message" name="message" required></textarea>
-        </div>
-        <button type="submit">Send Message</button>
-      </form>
-    </main>
-  </body>
+	<main>
+		<h1>Contact Us</h1>
+		<p>Have any questions? Let us know and we'll be sure to get back to you!</p>
+		<form>
+			<div class="form-group">
+				<label for="firstName">First Name*</label>
+				<input type="text" id="firstName" name="firstName" required>
+			</div>
+			<div class="form-group">
+				<label for="lastName">Last Name*</label>
+				<input type="text" id="lastName" name="lastName" required>
+			</div>
+			<div class="form-group">
+				<label for="email">Email*</label>
+				<input type="email" id="email" name="email" required>
+			</div>
+			<div class="form-group message">
+				<label for="message">Message*</label>
+				<textarea id="message" name="message" rows="6" required></textarea>
+			</div>
+			<button type="submit">Send Message</button>
+		</form>
+	</main>
+</body>
 </html>

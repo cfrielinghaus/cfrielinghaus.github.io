@@ -1,64 +1,31 @@
-/* Top banner styles */
-.top-banner {
-    background-color: #333;
-    color: #9c27b0; /* dark neon purple */
-    padding: 10px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1;
-    border-bottom: 5px solid #ccc; /* silver metallic */
-  }
-  
-  .top-banner h1 {
-    margin: 0;
-    display: inline-block;
-    font-size: 32px;
-    color: #ccc; /* silver metallic */
-    text-shadow: 2px 2px #9c27b0; /* dark neon purple */
-  }
-  
-  .top-banner ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-  }
-  
-  .top-banner li {
-    display: inline-block;
-    margin: 0 20px;
-  }
-  
-  .top-banner a {
-    color: #ccc; /* silver metallic */
-    text-decoration: none;
-    font-size: 24px;
-  }
-  
-  /* About Us section styles */
-  #about-us {
-    margin-top: 80px;
-    padding: 50px 0;
-    background-color: #fff;
-  }
-  
-  .section-heading {
-    font-size: 36px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-  }
-  
-  .row {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -15px;
-  }
+.banner {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: linear-gradient(to bottom right, #292d3e, #746fb0);
+  height: 80px;
+}
+
+.banner-logo {
+  display: flex;
+  align-items: center;
+}
+
+.banner-logo img {
+  height: 50px;
+  margin-right: 10px;
+}
+
+.banner-links {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 40%;
+}
+
+.banner-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+}

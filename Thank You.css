@@ -1,0 +1,44 @@
+.thank-you-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .thank-you-text {
+    margin-bottom: 2rem;
+  }
+  
+  .thank-you-text h1 {
+    font-size: 3rem;
+    color: #fff;
+  }
+  
+  .thank-you-button {
+    text-align: center;
+  }
+  
+  .thank-you-button a {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: #9d6cf2;
+    color: #fff;
+    font-size: 1.5rem;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .thank-you-button a:hover {
+    background-color: #8039b7;
+  }
+  
+  .background {
+	background-image: url('images/nea2.png');
+	background-size: cover;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
