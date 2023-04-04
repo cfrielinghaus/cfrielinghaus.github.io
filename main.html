@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <title>Contact Us | CrimeEye</title>
   <link rel="stylesheet" href="Contact Us.css">
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqGZzjg6QKJLnXTpcCA5Cr5QlN59u-CC8
+  "></script>
+  <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
+	<link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
 </head>
 <body>
   <header>
@@ -21,10 +25,21 @@
         </div>
     </div>      
   </header>
-    <!-- Map area -->
-    <div id="map-area"></div>
+  <div id='map'>
+    
+    <script src='capstone_wizardry.js'>
+		L.mapbox.accessToken = 'pk.eyJ1IjoiY2ZyaWVsaW5naGF1cyIsImEiOiJjbGcyN3RkeXUwMnFxM3FtcnB5N2w3eWx3In0.2CfFgyYR9eu8GWUMLDJiBg';
 
-    <!-- Add map implementation here -->
+		var map = L.mapbox.map('map', 'mapbox.streets')
+			.setView([34.0522, -118.2437], 11);
 
-  </body>
+		var marker = L.marker([34.0522, -118.2437]).addTo(map);
+
+		var popup = L.popup()
+			.setLatLng([34.0522, -118.2437])
+			.setContent('Los Angeles')
+			.openOn(map);
+	</script>
+  </div>
+</body>
 </html>
