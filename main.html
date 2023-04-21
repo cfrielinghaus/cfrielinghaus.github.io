@@ -4,10 +4,16 @@
   <meta charset="UTF-8">
   <title>Contact Us | CrimeEye</title>
   <link rel="stylesheet" href="Contact Us.css">
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqGZzjg6QKJLnXTpcCA5Cr5QlN59u-CC8
-  "></script>
-  <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
-	<link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+  integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+  crossorigin=""></script> 
+  <style>
+    #map { height: 100%; }
+  </style>
 </head>
 <body>
   <header>
@@ -26,20 +32,15 @@
     </div>      
   </header>
   <div id='map'>
-    
-    <script src='capstone_wizardry.js'>
-		L.mapbox.accessToken = 'pk.eyJ1IjoiY2ZyaWVsaW5naGF1cyIsImEiOiJjbGcyN3RkeXUwMnFxM3FtcnB5N2w3eWx3In0.2CfFgyYR9eu8GWUMLDJiBg';
-
-		var map = L.mapbox.map('map', 'mapbox.streets')
-			.setView([34.0522, -118.2437], 11);
-
-		var marker = L.marker([34.0522, -118.2437]).addTo(map);
-
-		var popup = L.popup()
-			.setLatLng([34.0522, -118.2437])
-			.setContent('Los Angeles')
-			.openOn(map);
-	</script>
   </div>
+  <script>
+      var map = L.map('map').setView([51.505, -0.09], 13);
+
+      L.tileLayer('https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}.png?key=2XJGQLXW5G76HIpw3DNL', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+
+      }).addTo(map);
+      var marker = L.marker([51.5, -0.09]).addTo(map);
+  </script>
 </body>
 </html>
