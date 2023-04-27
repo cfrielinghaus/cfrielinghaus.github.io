@@ -1,0 +1,109 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Crime in Los Angeles – Leaflet Heatmap</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.11.1/tachyons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+
+</head>
+
+<body class="helvetica">
+
+  <div id="map" class="vh-100 vw-100 bg-near-white"></div>
+
+  <div id="legend" class="bg-white fixed top-0 left-0 pa2 mt2 ml2 br1 o-90" style="z-index: 999; width: 380px">
+    <h1 class="f3 mt0">Crime in Los Angeles</h1>
+
+    <p class="measure mb1">
+      This heatmap shows hotspots of crime in Los Angeles
+      from January 2020 - April 2023 according to the Metropolitan Police data.
+    </p>
+
+  </div>
+
+  <script>
+
+    var map = L.map('map', {
+      zoomControl: false, // Add zoom control separately below
+      center: [34.05, -118.24], // Initial map center
+      zoom: 10, // Initial zoom level
+      attributionControl: false, // Instead of default attribution, we add custom at the bottom of script
+      scrollWheelZoom: false
+    })
+
+    // Add zoom in/out buttons to the top-right
+    L.control.zoom({position: 'topright'}).addTo(map)
+
+    // Add baselayer
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19
+    }).addTo(map)
+
+    // Add geographical labels only layer on top of baselayer
+    var labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19,
+      pane: 'shadowPane'  // always display on top
+    }).addTo(map)
+
+    // Read data from CSV file
+    $.get('./data/data.csv', function(csvString) {
+
+      // Use PapaParse to transform file into arrays
+      var data = Papa.parse(csvString.trim()).data.filter(
+        function(row) { return row.length === 2 }
+      ).map(function(a) {
+        return [ parseFloat(a[0]), parseFloat(a[1]) ]
+      })
+
+      // Add all points into a heat layer
+      var heat = L.heatLayer(data, {
+        radius: 5,
+        blur: 8,
+      })
+
+      // Add the heatlayer to the map
+      heat.addTo(map)
+    })
+
+    // Add custom attribution
+    L.control.attribution({
+      prefix: '<a href="https://github.com/HandsOnDataViz/leaflet-heatmap">View data and code</a> \
+        by <a href="https://handsondataviz.org" target="_blank">HandsOnDataViz</a>'
+    }).addTo(map)
+
+    // Define a function to update the heatmap layer with new data
+    function updateHeatmap(columnIndex) {
+    var newDataPoints = []; // Initialize empty array for new data points
+    for (var i = 0; i < dataPoints.length; i++) {
+        newDataPoints.push([dataPoints[i][0], dataPoints[i][columnIndex]]); // Extract the lat/long and column value for the selected column
+    }
+    heatmapLayer.setLatLngs(newDataPoints); // Update the heatmap layer with the new data points
+}
+
+    // Add a UI element to let the user toggle between different columns
+  var columnSelect = document.getElementById('column-select');
+  columnSelect.addEventListener('change', function() {
+    var columnIndex = this.selectedIndex; // Get the index of the selected column
+    updateHeatmap(columnIndex); // Update the heatmap layer with the selected column
+  });
+
+  </script>
+
+</body>
+
+</html>
