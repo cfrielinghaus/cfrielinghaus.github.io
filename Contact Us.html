@@ -1,68 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Contact Us | CrimeEye</title>
-  <link rel="stylesheet" href="Contact Us.css">
+  <title>Contact Us</title>
 </head>
 <body>
-  <header>
-    <div class="banner">
-        <div class="banner-links">
-          <a href="main.html" class="banner-link">Map</a>
-          <a href="About Us.html" class="banner-link">About Us</a>
+  <form id="contactForm">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <input type="text" name="firstname" class="form-control" id="firstname" placeholder="First Name" required>
         </div>
-        <div class="banner-logo">
-          <a href="index.html"><img src="images/logo.png" alt="CrimeEye Logo"></a>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <input type="text" name="lastname" class="form-control" id="lastname" placeholder="Last Name" required>
         </div>
-        <div class="banner-links">
-          <a href="#" class="banner-link">Our Mission</a>
-          <a href="Contact Us.html" class="banner-link">Contact Us</a>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <input type="email" name="email" class="form-control" id="email" placeholder="Your Email" required>
         </div>
-    </div>      
-  </header>
-	<main>
-		<!-- Contact Us Section -->
-<section id="contact">
-	<div class="container">
-	  <div class="section-title">
-		<h2>Contact Us</h2>
-		<p>Have any questions? Let us know and we'll be sure to get back to you!</p>
-	  </div>
-	  <div class="row">
-		<div class="col-lg-12">
-		  <form id="contactForm" method="post" role="form">
-			<div class="row">
-			  <div class="col-md-6">
-				<div class="form-group">
-				  <input type="text" name="firstname" class="form-control" id="firstname" placeholder="First Name" required>
-				</div>
-			  </div>
-			  <div class="col-md-6">
-				<div class="form-group">
-				  <input type="text" name="lastname" class="form-control" id="lastname" placeholder="Last Name" required>
-				</div>
-			  </div>
-			  <div class="col-md-12">
-				<div class="form-group">
-				  <input type="email" name="email" class="form-control" id="email" placeholder="Your Email" required>
-				</div>
-			  </div>
-			  <div class="col-md-12">
-				<div class="form-group">
-				  <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-				</div>
-			  </div>
-			  <div class="col-md-12">
-				<button type="button"><a href="Thank You.html">Submit</a></button> 
-			  </div>
-			</div>
-		  </form>
-		</div>
-	  </div>
-	</div>
-  </section>
-  
-	</main>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <button type="submit">Submit</button>
+      </div>
+    </div>
+  </form>
+
+  <script src="https://cdn.jsdelivr.net/npm/validator@13.6.0"></script>
+  <script>
+    const form = document.getElementById('contactForm');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const firstName = document.getElementById('firstname').value;
+      const lastName = document.getElementById('lastname').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      const errors = [];
+
+      if (!validator.isLength(firstName, { min: 2, max: 50 })) {
+        errors.push('First name must be between 2 and 50 characters');
+      }
+
+      if (!validator.isLength(lastName, { min: 2, max: 50 })) {
+        errors.push('Last name must be between 2 and 50 characters');
+      }
+
+	  if (firstNameInput.value.trim() === '') {
+  		errors.push('First name is required');
+	  }
+
+	  if (lastNameInput.value.trim() === '') {
+  	  	errors.push('Last name is required');
+	  }
+
+	  if (emailInput.value.trim() === '') {
+  		errors.push('Email is required');
+	  }
+	  
+      if (!validator.isEmail(email)) {
+        errors.push('Email is not valid');
+      }
+
+      if (!validator.isLength(message, { min: 10, max: 1000 })) {
+        errors.push('Message must be between 10 and 1000 characters');
+      }
+
+      if (errors.length > 0) {
+        const errorList = document.createElement('ul');
+        errors.forEach((error) => {
+          const li = document.createElement('li');
+          li.textContent = error;
+          errorList.appendChild(li);
+        });
+        const errorDiv = document.getElementById('errorDiv');
+        errorDiv.innerHTML = '';
+        errorDiv.appendChild(errorList);
+      } else {
+        form.submit();
+      }
+    });
+  </script>
 </body>
 </html>
