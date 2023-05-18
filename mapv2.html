@@ -30,6 +30,12 @@
       from January 2020 - April 2023 according to the Metropolitan Police data.
     </p>
 
+    <select id="column-select">
+      <option value="0">Column 1</option>
+      <option value="1">Column 2</option>
+      <option value="2">Column 3</option>
+    </select>
+
   </div>
 
   <script>
@@ -78,6 +84,23 @@
 
       // Add the heatlayer to the map
       heat.addTo(map)
+
+      // Define a function to update the heatmap layer with new data
+      function updateHeatmap(columnIndex) {
+        var newDataPoints = []; // Initialize empty array for new data points
+        for (var i = 0; i < data.length; i++) {
+          newDataPoints.push([data[i][0], data[i][columnIndex]]); // Extract the lat/long and column value for the selected column
+        }
+        heat.setLatLngs(newDataPoints); // Update the heatmap layer with the new data points
+      }
+
+      // Add a UI element to let the user toggle between different columns
+      var columnSelect = document.getElementById('column-select');
+      columnSelect.addEventListener('change', function() {
+        var columnIndex = parseInt(this.value); // Get the index of the selected column
+        updateHeatmap(columnIndex); // Update the heatmap layer with the selected column
+      });
+
     })
 
     // Add custom attribution
@@ -85,22 +108,6 @@
       prefix: '<a href="https://github.com/HandsOnDataViz/leaflet-heatmap">View data and code</a> \
         by <a href="https://handsondataviz.org" target="_blank">HandsOnDataViz</a>'
     }).addTo(map)
-
-    // Define a function to update the heatmap layer with new data
-    function updateHeatmap(columnIndex) {
-    var newDataPoints = []; // Initialize empty array for new data points
-    for (var i = 0; i < dataPoints.length; i++) {
-        newDataPoints.push([dataPoints[i][0], dataPoints[i][columnIndex]]); // Extract the lat/long and column value for the selected column
-    }
-    heatmapLayer.setLatLngs(newDataPoints); // Update the heatmap layer with the new data points
-}
-
-    // Add a UI element to let the user toggle between different columns
-  var columnSelect = document.getElementById('column-select');
-  columnSelect.addEventListener('change', function() {
-    var columnIndex = this.selectedIndex; // Get the index of the selected column
-    updateHeatmap(columnIndex); // Update the heatmap layer with the selected column
-  });
 
   </script>
 
