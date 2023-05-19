@@ -1,129 +1,91 @@
 /* Banner */
 .banner {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background: linear-gradient(to bottom right, #292d3e, #746fb0);
-    height: 80px;
-  }
-  
-  .banner-logo {
-    display: flex;
-    align-items: center;
-  }
-  
-  .banner-logo img {
-    height: 50px;
-    margin-right: 10px;
-  }
-  
-  .banner-links {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 40%;
-  }
-  
-  .banner-links a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  /* Contact Us section */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: linear-gradient(to bottom right, #292d3e, #746fb0);
+  height: 80px;
+}
 
-  body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #181818, #3d1452);
-    color: #fff;
-    margin: 0;
-  }
+.banner-logo {
+  display: flex;
+  align-items: center;
+}
 
-  form {
-    width: 70%;
-    margin: 0 auto;
-    max-width: 600px;
-    padding: 20px;
-    background-color: #7a23ac;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-    border-radius: 5px;
-    position: relative;
-    top: -50px;
-    z-index: 2;
-  }
-  
-  
-  .contact-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 50px;
-  }
-  
-  .contact-title {
-    font-size: 36px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .contact-blurb {
-    font-size: 24px;
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #000000;
-    width: 500px;
-    height: 600px;
-    border-radius: 10px;
-    padding: 50px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-  }
-  
-  .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 18px;
-    font-family: 'Roboto', sans-serif;
-  }
-  
-  .contact-form textarea {
-    height: 300px;
-    resize: none;
-  }
-  
-  .contact-form input[type="submit"] {
-    background-color: #8b008b;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 15px 30px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .contact-form input[type="submit"]:hover {
-    transform: scale(1.1);
-    background-color: #5e165a;
-  }
-  
-  .contact-form label {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
+.banner-logo img {
+  height: 50px;
+  margin-right: 10px;
+}
 
-@media (max-width: 768px) {
-    .contact-form {
-      width: 80%;
-    }
+.banner-links {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 40%;
+}
+
+.banner-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Contact Us section */
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #181818, #3d1452);
+  color: #fff;
+  margin: 0;
+}
+
+form {
+  width: 70%;
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 20px;
+  background-color: #7a23ac;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+form h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+form label {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+form input[type="text"],
+form input[type="email"],
+form textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: none;
+}
+
+form textarea {
+  height: 150px;
+}
+
+form input[type="submit"] {
+  background-color: #292d3e;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+  background-color: #746fb0;
 }

@@ -47,51 +47,42 @@ main {
 }
 
 .about {
-  width: 50%;
-  text-align: center;
-  margin-right: 50px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 80%;
+  max-width: 800px;
+  margin: 50px auto;
 }
 
 .about h1 {
-  font-size: 50px;
+  font-size: 36px;
   margin-bottom: 20px;
 }
 
 .about p {
-  font-size: 25px;
-  line-height: 1.6;
-  text-align: center;
-  margin-left: 30px;
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 20px;
 }
 
-.about img {
-  width: 80%;
-  max-width: 200px;
-  margin-top: 30px;
+.about ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.signature {
-  display: block;
-  width: 150px;
-  margin: 30px auto;
+.about li {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 10px;
 }
 
-.logo-small {
-  width: 50px;
-  margin-top: 30px;
-}
-
-
-.image-container {
-  width: 50%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.image-container img {
-  display: block;
-  margin: 0 auto;
-  max-height: 600px;
-  object-fit: cover;
+.about li:before {
+  content: "•";
+  color: #292d3e;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
 }

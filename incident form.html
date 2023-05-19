@@ -1,0 +1,58 @@
+<form id="incident-form">
+  <label for="location">Location:</label>
+  <input type="text" id="location" name="location" required>
+
+  <label for="incident">Incident:</label>
+  <input type="text" id="incident" name="incident" required>
+
+  <label for="description">Description:</label>
+  <textarea id="description" name="description" required></textarea>
+
+  <label for="time">Time:</label>
+  <input type="datetime-local" id="time" name="time" required>
+
+  <button type="submit">Submit</button>
+</form>
+
+<style>
+  #incident-form {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  #incident-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  #incident-form input,
+  #incident-form textarea {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+  }
+
+  #incident-form button[type="submit"] {
+    display: block;
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+</style>
