@@ -30,7 +30,37 @@
   font-size: 18px;
   font-weight: bold;
 }
+.banner {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: linear-gradient(to bottom right, #292d3e, #746fb0);
+  height: 80px;
+}
 
+.banner-logo {
+  display: flex;
+  align-items: center;
+}
+
+.banner-logo img {
+  height: 50px;
+  margin-right: 10px;
+}
+
+.banner-links {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 40%;
+}
+
+.banner-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+}
 /* Contact Us section */
 body {
   font-family: Arial, sans-serif;
@@ -88,4 +118,15 @@ form input[type="submit"] {
 
 form input[type="submit"]:hover {
   background-color: #746fb0;
+}
+
+#errorDiv ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#errorDiv li {
+  color: red;
+  margin-bottom: 5px;
 }
