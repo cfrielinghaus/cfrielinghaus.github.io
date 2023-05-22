@@ -38,51 +38,38 @@ body {
   font-weight: bold;
 }
 
-main {
+.about-container {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
-  padding: 50px;
-}
-
-.about {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
-  width: 80%;
-  max-width: 800px;
-  margin: 50px auto;
 }
 
-.about h1 {
-  font-size: 36px;
-  margin-bottom: 20px;
+.about-text {
+  flex-basis: 50%;
+  padding-right: 20px;
+  font-size: 20px;
+  text-align: center;
 }
 
-.about p {
-  font-size: 18px;
-  line-height: 1.5;
-  margin-bottom: 20px;
+.about-image {
+  flex-basis: 40%;
 }
 
-.about ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.about-img {
+  width: 100%;
+  height: auto;
 }
 
-.about li {
-  font-size: 18px;
-  line-height: 1.5;
-  margin-bottom: 10px;
+.signature {
+  width: 150px;
+  height: auto;
+  margin-top: 10px;
 }
 
-.about li:before {
-  content: "•";
-  color: #292d3e;
-  display: inline-block;
-  width: 1em;
-  margin-left: -1em;
+.logo-small {
+  width: 150px;
+  height: auto;
+  margin-top: 20px;
 }

@@ -72,6 +72,7 @@ body {
 form {
   width: 70%;
   margin: 0 auto;
+  margin-top: 20px;
   max-width: 600px;
   padding: 20px;
   background-color: #7a23ac;
