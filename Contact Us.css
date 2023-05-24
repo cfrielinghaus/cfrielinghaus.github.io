@@ -61,6 +61,12 @@
   font-size: 18px;
   font-weight: bold;
 }
+
+.banner-link:hover {
+  color: #7b9ddb30;
+  text-decoration: highlight;
+}
+
 /* Contact Us section */
 body {
   font-family: Arial, sans-serif;
@@ -71,6 +77,8 @@ body {
 
 form {
   width: 70%;
+  border: 2px solid #fff;
+  font-family: Arial, sans-serif;
   margin: 0 auto;
   margin-top: 20px;
   max-width: 600px;
@@ -115,6 +123,11 @@ form input[type="submit"] {
   border-radius: 5px;
   border: none;
   cursor: pointer;
+}
+
+form button[type="submit"]:hover {
+  background-color: #7b9ddb30;
+  color: #fff;
 }
 
 form input[type="submit"]:hover {

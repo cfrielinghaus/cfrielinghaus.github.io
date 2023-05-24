@@ -44,17 +44,19 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
+  border: 2px solid #ccc;
 }
 
 .about-text {
   flex-basis: 50%;
-  padding-right: 20px;
+  padding-left: 20px;
   font-size: 20px;
-  text-align: center;
+  text-align: left;
 }
 
 .about-image {
   flex-basis: 40%;
+  text-align: right;
 }
 
 .about-img {
@@ -71,5 +73,4 @@ body {
 .logo-small {
   width: 150px;
   height: auto;
-  margin-top: 20px;
 }
