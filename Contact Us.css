@@ -106,13 +106,16 @@ form textarea {
   padding: 10px;
   font-size: 18px;
   margin-bottom: 20px;
+  border: 2px solid #fff;
   border-radius: 5px;
-  border: none;
+  padding: 5px;
+  background-color: #c3cbed;
 }
 
 form textarea {
   height: 150px;
 }
+
 
 form input[type="submit"] {
   background-color: #292d3e;

@@ -22,15 +22,12 @@
   </header>
   <form id="contactForm">
   <div>
-    <label for="firstName">First Name:</label>
-    <input type="text" id="firstName" name="firstName" required>
-    <span class="error" id="firstNameError"></span>
-  </div>
-  <div>
-    <label for="lastName">Last Name:</label>
-    <input type="text" id="lastName" name="lastName" required>
-    <span class="error" id="lastNameError"></span>
-  </div>
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      <div id="nameError" class="error"></div>
+    </div>
+    <div>
   <div>
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" required>
@@ -44,68 +41,64 @@
   <button type="submit">Submit</button>
 </form>
 
-  <script src="https://cdn.jsdelivr.net/npm/validator@13.6.0"></script>
+<div id="errorDiv"></div>
+
   <script>
-    const contactForm = document.getElementById('contactForm');
+    const form = document.getElementById('contactForm');
 
-contactForm.addEventListener('submit', (event) => {
-  const firstNameInput = document.getElementById('firstName');
-  const lastNameInput = document.getElementById('lastName');
-  const emailInput = document.getElementById('email');
-  const messageInput = document.getElementById('message');
+    form.addEventListener('submit', (event) => {
+      const nameInput = document.getElementById('name');
+      const emailInput = document.getElementById('email');
+      const messageInput = document.getElementById('message');
 
-  const firstName = firstNameInput.value.trim();
-  const lastName = lastNameInput.value.trim();
-  const email = emailInput.value.trim();
-  const message = messageInput.value.trim();
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim();
+      const message = messageInput.value.trim();
 
-  const errors = [];
+      const errors = [];
 
-  // Validate the form fields
-  if (firstName.length < 2 || firstName.length > 50) {
-    errors.push('First name must be between 2 and 50 characters');
-    document.getElementById('firstNameError').textContent = 'First name must be between 2 and 50 characters';
-  } else {
-    document.getElementById('firstNameError').textContent = '';
-  }
-  if (lastName.length < 2 || lastName.length > 50) {
-    errors.push('Last name must be between 2 and 50 characters');
-    document.getElementById('lastNameError').textContent = 'Last name must be between 2 and 50 characters';
-  } else {
-    document.getElementById('lastNameError').textContent = '';
-  }
-  if (!email.includes('@')) {
-    errors.push('Please enter a valid email address');
-    document.getElementById('emailError').textContent = 'Please enter a valid email address';
-  } else {
-    document.getElementById('emailError').textContent = '';
-  }
-  if (message.length === 0) {
-    errors.push('Please enter a message');
-    document.getElementById('messageError').textContent = 'Please enter a message';
-  } else {
-    document.getElementById('messageError').textContent = '';
-  }
+      // Validate the name field
+      if (name.length === 0) {
+        errors.push('Please enter your name');
+        document.getElementById('nameError').textContent = 'Please enter your name';
+      } else {
+        document.getElementById('nameError').textContent = '';
+      }
 
-  // If there are errors, prevent the form from being submitted
-  if (errors.length > 0) {
-    event.preventDefault(); // Prevent the default form submission behavior
+      // Validate the email field
+      if (!email.includes('@')) {
+        errors.push('Please enter a valid email address');
+        document.getElementById('emailError').textContent = 'Please enter a valid email address';
+      } else {
+        document.getElementById('emailError').textContent = '';
+      }
 
-    const errorList = document.createElement('ul');
-    errors.forEach((error) => {
-      const li = document.createElement('li');
-      li.textContent = error;
-      errorList.appendChild(li);
-    });
+      // Validate the message field
+      if (message.length === 0) {
+        errors.push('Please enter a message');
+        document.getElementById('messageError').textContent = 'Please enter a message';
+      } else {
+        document.getElementById('messageError').textContent = '';
+      }
 
-    const errorDiv = document.getElementById('errorDiv');
-    errorDiv.innerHTML = '';
-    errorDiv.appendChild(errorList);
-  }
-    else {
+      // If there are errors, prevent the form from being submitted
+      if (errors.length > 0) {
+        event.preventDefault(); // Prevent the default form submission behavior
+
+        const errorList = document.createElement('ul');
+        errors.forEach((error) => {
+          const li = document.createElement('li');
+          li.textContent = error;
+          errorList.appendChild(li);
+        });
+
+        const errorDiv = document.getElementById('errorDiv');
+        errorDiv.innerHTML = '';
+        errorDiv.appendChild(errorList);
+      } else {
         window.location.href = 'Thank You.html';
       }
-});
+    });
   </script>
 </body>
 </html>
