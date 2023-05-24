@@ -1,0 +1,141 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Crime in Los Angeles – Leaflet Heatmap</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.11.1/tachyons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+
+</head>
+
+<body class="helvetica">
+
+  <div id="map" class="vh-100 vw-100 bg-near-white"></div>
+
+  <div id="legend" class="bg-white fixed top-0 left-0 pa2 mt2 ml2 br1 o-90" style="z-index: 999; width: 380px">
+    <h1 class="f3 mt0">Crime in Los Angeles</h1>
+
+    <p class="measure mb1">
+      This heatmap shows hotspots of crime in Los Angeles
+      from January 2020 - April 2023 according to the Metropolitan Police data.
+    </p>
+
+  </div>
+  <button id="geolocation-button">Get Current Location</button>
+  <style>
+#geolocation-button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px;
+  cursor: pointer;
+}
+</style>
+  <div?\>
+    
+  </div>
+
+  <script>
+
+    var map = L.map('map', {
+      zoomControl: false, // Add zoom control separately below
+      center: [34.05, -118.24], // Initial map center
+      zoom: 10, // Initial zoom level
+      attributionControl: false, // Instead of default attribution, we add custom at the bottom of script
+      scrollWheelZoom: false
+    })
+
+    // Add zoom in/out buttons to the top-right
+    L.control.zoom({position: 'topright'}).addTo(map)
+
+    // Add baselayer
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19
+    }).addTo(map)
+
+    // Add geographical labels only layer on top of baselayer
+    var labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19,
+      pane: 'shadowPane'  // always display on top
+    }).addTo(map)
+
+    // Create a layer group for each crime type
+var batteryLayer = L.layerGroup();
+var vandalismLayer = L.layerGroup();
+var burglaryLayer = L.layerGroup();
+var theftLayer = L.layerGroup();
+var identityTheftLayer = L.layerGroup();
+var vehicleTheftLayer = L.layerGroup();
+
+// Parse the CSV file and add the data points to the appropriate layer group
+Papa.parse('./data/data.csv', {
+  header: true,
+  download: true,
+  dynamicTyping: true,
+  complete: function(results) {
+    results.data.forEach(function(d) {
+      var lat = d.latitude;
+      var lng = d.longitude;
+      var type = d.type;
+
+      if (type === "BATTERY - SIMPLE ASSAULT") {
+        batteryLayer.addLayer(L.marker([lat, lng]));
+      } else if (type === "VANDALISM - FELONY (>$400)") {
+        vandalismLayer.addLayer(L.marker([lat, lng]));
+      } else if (type === "BURGLARY FROM VEHICLE") {
+        burglaryLayer.addLayer(L.marker([lat, lng]));
+      } else if (type === "THEFT") {
+        theftLayer.addLayer(L.marker([lat, lng]));
+      } else if (type === "THEFT OF IDENTITY") {
+        identityTheftLayer.addLayer(L.marker([lat, lng]));
+      } else if (type === "VEHICLE - STOLEN") {
+        vehicleTheftLayer.addLayer(L.marker([lat, lng]));
+      }
+    });
+  }
+});
+
+// Create a heatmap layer for each crime type
+var batteryHeatmap = L.heatLayer([], { radius: 20 });
+var vandalismHeatmap = L.heatLayer([], { radius: 20 });
+var burglaryHeatmap = L.heatLayer([], { radius: 20 });
+var theftHeatmap = L.heatLayer([], { radius: 20 });
+var identityTheftHeatmap = L.heatLayer([], { radius: 20 });
+var vehicleTheftHeatmap = L.heatLayer([], { radius: 20 });
+
+
+// Add the layer groups to the map
+var overlayMaps = {
+  "Battery - Simple Assault": batteryLayer,
+  "Vandalism - Felony (>$400)": vandalismLayer,
+  "Burglary from Vehicle": burglaryLayer,
+  "Theft": theftLayer,
+  "Theft of Identity": identityTheftLayer,
+  "Vehicle - Stolen": vehicleTheftLayer
+};
+L.control.layers(null, overlayMaps).addTo(map);
+
+  </script>
+
+</body>
+
+</html>
