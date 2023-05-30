@@ -1,0 +1,115 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Crime in Los Angeles – Leaflet Heatmap</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.11.1/tachyons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+
+</head>
+
+<body class="helvetica">
+
+    <div id="map" class="vh-100 vw-100 bg-near-white"></div>
+
+    <script>
+      var map = L.map('map', {
+        center: [34.05, -118.24], // Initial map center
+        zoom: 11, // Initial zoom level
+        attributionControl: false, // Instead of default attribution, we add custom at the bottom of script
+        scrollWheelZoom: true, // Enable scroll wheel zoom
+        dragging: true // Enable click and drag camera movement
+      });
+    
+      // Add baselayer
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 19
+      }).addTo(map);
+    
+      // Add geolocation button to top-right corner of map
+      var geolocationButton = document.createElement('button');
+      geolocationButton.id = 'geolocation-button';
+      geolocationButton.textContent = 'Get Current Location';
+      geolocationButton.style.position = 'absolute';
+      geolocationButton.style.bottom = '10px';
+      geolocationButton.style.right = '10px';
+      map.getContainer().appendChild(geolocationButton);
+    
+      geolocationButton.addEventListener('click', function() {
+        if (!navigator.geolocation) {
+          alert('Geolocation is not supported by your browser');
+        } else {
+          navigator.geolocation.getCurrentPosition(success, error);
+        }
+      });
+    
+      function success(position) {
+        var latitude  = position.coords.latitude;
+        var longitude = position.coords.longitude;
+    
+        var marker = L.marker([latitude, longitude], {
+          icon: L.icon({
+            iconUrl: 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png',
+            iconSize: [32, 32],
+            iconAnchor: [16, 32]
+          })
+        }).addTo(map);
+    
+        marker.bindPopup(
+          <form method="post" action="submit.php">
+            <label for="crime-type">Crime Type:</label>
+            <input type="text" id="crime-type" name="crime-type" required />
+    
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+    
+            <label for="time">Time:</label>
+            <input type="datetime-local" id="time" name="time" required></input>
+    
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" value="${latitude}, ${longitude}" readonly />
+
+
+    
+            <button type="submit">Submit</button>
+          </form>
+        ).openPopup();
+    
+        marker.on('popupopen', function() {
+          var form = document.querySelector('.leaflet-popup-content form');
+          form.addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            var crimeType = document.getElementById('crime-type').value;
+            var description = document.getElementById('description').value;
+            var time = document.getElementById('time').value;
+            var location = document.getElementById('location').value;
+    
+            // Send crime report to server
+            // ...
+    
+            alert('Crime reported successfully!');
+            map.closePopup();
+          });
+        });
+      }
+    
+      function error() {
+        alert('Unable to retrieve your location');
+      }
+    </script>
+</body>
+</html>
+``` 
