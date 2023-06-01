@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Crime in Los Angeles – Leaflet Heatmap</title>
+  <title>Crime in Los Angeles – Iconic Incident Map</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.11.1/tachyons.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css">
@@ -126,45 +126,5 @@
         alert('Unable to retrieve your location');
       }
     </script>
-      <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "crimemap";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
-
-$crimetype = $_POST['crime-type'];
-$description = $_POST['description'];
-$time = $_POST['time'];
-$location = $_POST['location'];
-
-$sql = "INSERT INTO crimes (crimetype, description, time, location)
-VALUES ('$crimetype', '$description', '$time', '$location')";
-if ($conn->query($sql) === TRUE) {
-  echo "New record created successfully";
-} else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
-}
-
-$conn->close();
-?>
-</body>
+  </body>
 </html>
-```
-
-
-
-I am trying to create a crime map using leaflet and php. I have created a form that allows the user to input the crime type, description, time and location. I have also created a database in phpmyadmin called crimemap and a table called crimes. I am trying to get the data from the form to be inserted into the table but I am getting the error:
-> Notice: Undefined index: crime-type in C:\xampp\htdocs\leaflet\submit.php on line 14
-> Notice: Undefined index: description in C:\xampp\htdocs\leaflet\submit.php on line 15
-> Error: INSERT INTO crimes (crimetype, description) VALUES ('', '')
-I am not sure why I am getting this error. I have tried to change the names of the variables but I am still getting the same error. I am new to php so I am not sure what I am doing wrong. Any help would be appreciated. Thanks in advance.
-
-
-```
