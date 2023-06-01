@@ -21,6 +21,22 @@
 <body class="helvetica">
 
     <div id="map" class="vh-100 vw-100 bg-near-white"></div>
+      
+  <button id="geolocation-button">Use My Location</button>
+
+  <form id="crime-report-form" method="post" action="submit.php">
+    <label for="crime-type">Crime Type:</label>
+    <input type="text" id="crime-type" name="crime-type" required />
+
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" required></textarea>
+
+    <label for="time">Time:</label>
+    <input type="datetime-local" id="time" name="time" required></input>
+
+    <label for="location">Location:</label>
+    <input type="text" id="location" name="location" required />
+  </form>
 
     <script>
       var map = L.map('map', {
