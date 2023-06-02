@@ -56,22 +56,31 @@
     geolocationButton.style.right = '10px';
     map.getContainer().appendChild(geolocationButton);
   
-    geolocationButton.addEventListener('click', function() {
-      if (!navigator.geolocation) {
-        alert('Geolocation is not supported by your browser');
-      } else {
-        navigator.geolocation.getCurrentPosition(success, error);
-      }
-    });
-  
-    function success(position) {
-      var latitude  = position.coords.latitude;
-      var longitude = position.coords.longitude;
-  
-      var marker = L.marker([latitude, longitude]).addTo(map);
-      marker.bindPopup("<b>You are here!</b>").openPopup();
-    }
+// Add a click event listener to the geolocation button
+geolocationButton.addEventListener('click', function() {
+  // Get the user's location using the geolocation API
+  navigator.geolocation.getCurrentPosition(function(position) {
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
 
+    // Update the map's center with the user's coordinates
+    map.setView([lat, lng], 15);
+
+    // Add a marker to the map at the user's location
+    var marker = L.marker([lat, lng]).addTo(map);
+
+    // Update the marker's position as the user moves
+    navigator.geolocation.watchPosition(function(position) {
+      var lat = position.coords.latitude;
+      var lng = position.coords.longitude;
+
+      marker.setLatLng([lat, lng]);
+    });
+  }, function(error) {
+    // Handle any errors that occur
+    console.error(error);
+  });
+});
     // Add geographical labels only layer on top of baselayer
     var labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
@@ -135,7 +144,12 @@ var overlayMaps = {
 L.control.layers(null, overlayMaps).addTo(map);
 
   </script>
-
+ <style>
+    #geolocation-button {
+  position: absolute;
+  z-index: 9999;
+}
+ </style>
 </body>
 
 </html>

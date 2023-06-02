@@ -82,6 +82,15 @@
             iconAnchor: [16, 32]
           })
         }).addTo(map);
+
+        // Add geographical labels only layer on top of baselayer
+    var labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19,
+      pane: 'shadowPane'  // always display on top
+    }).addTo(map)
+
     
         marker.bindPopup(
           <form method="post" action="submit.php">

@@ -121,6 +121,24 @@
         by <a href="https://handsondataviz.org" target="_blank">HandsOnDataViz</a>'
     }).addTo(map)
 
+    // Get a reference to the geolocation button
+var geolocationButton = document.getElementById('geolocation-button');
+
+// Add a click event listener to the geolocation button
+geolocationButton.addEventListener('click', function() {
+  // Get the user's location using the geolocation API
+  navigator.geolocation.getCurrentPosition(function(position) {
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+
+    // Update the map's center with the user's coordinates
+    map.setCenter(new google.maps.LatLng(lat, lng));
+  }, function(error) {
+    // Handle any errors that occur
+    console.error(error);
+  });
+});
+
   </script>
 
 </body>
