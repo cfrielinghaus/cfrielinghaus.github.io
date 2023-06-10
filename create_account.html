@@ -2,6 +2,8 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js" defer></script>
+<script src="/js/validation.js" defer></script>
 <style>
 body {font-family: Arial, Helvetica, sans-serif;}
 
@@ -131,20 +133,26 @@ span.psw {
 
 <div id="id01" class="modal">
   
-  <form class="modal-content animate" action="/action_page.php" method="post">
+  <form class="modal-content animate" action="process-signup.php" method="post" id="signup" novalidate>
     <div class="imgcontainer">
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
       <img src="images/logo.png" alt="Avatar" class="avatar">
     </div>
 
     <div class="container">
-      <label for="email"><b>E-mail</b></label>
-      <input type="text" placeholder="Enter E-mail" name="email" required>
+      <label for="name">Name</label>
+            <input type="text" id="name" name="name">
 
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+      <label for="email">email</label>
+            <input type="email" id="email" name="email">
+
+      <label for="password">Password</label>
+            <input type="password" id="password" name="password">
+
+      <label for="password_confirmation">Repeat password</label>
+            <input type="password" id="password_confirmation" name="password_confirmation">      
         
-      <button type="submit">Create Account</button>
+      <button>Create Account</button>
     </div>
 
     <div class="container" style="background-color:#f1f1f1">

@@ -1,5 +1,5 @@
 <?php
-// Connect to the database
+// Connect to MySQL database
 $servername = "localhost";
 $username = "username";
 $password = "password";
@@ -7,27 +7,34 @@ $dbname = "myDB";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-// Query the database for the incident report data
-$sql = "SELECT * FROM incident_reports";
+// Retrieve crime reports from database
+$sql = "SELECT * FROM crime_reports";
 $result = $conn->query($sql);
 
-// Convert the result set to a JSON array
-$incidentReports = array();
+$crimeReports = array();
+
 if ($result->num_rows > 0) {
   while ($row = $result->fetch_assoc()) {
-    $incidentReports[] = $row;
+    $crimeReport = array(
+      'id' => $row['id'],
+      'latitude' => $row['latitude'],
+      'longitude' => $row['longitude'],
+      'crimeType' => $row['crime_type'],
+      'description' => $row['description'],
+      'time' => $row['time'],
+      'location' => $row['location']
+    );
+    array_push($crimeReports, $crimeReport);
   }
 }
-$json = json_encode($incidentReports);
 
-// Output the JSON array
+// Return crime reports as JSON-encoded array
 header('Content-Type: application/json');
-echo $json;
+echo json_encode($crimeReports);
 
 $conn->close();
 ?>

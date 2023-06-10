@@ -20,70 +20,66 @@
 
 <body class="helvetica">
 
-    <div id="map" class="vh-100 vw-100 bg-near-white"></div>
-      
-  <button id="geolocation-button">Use My Location</button>
+  <div id="map" class="vh-100 vw-100 bg-near-white">
+    <button id="geolocation-button">Get Current Location</button>
+  </div>
+  
+  <div id="legend" class="bg-white fixed bottom-0 left-0 pa2 mt2 ml2 br1 o-90" style="z-index: 999; width: 380px">
+    <h1 class="f3 mt0">Incidents in Los Angeles</h1>
+    <p class="measure mb1">
+      Iconic Incident Map of crimes comitted that are submitted via user report.
+    </p>
+  </div>
+  
+  <script>
+    var map = L.map('map', {
+      center: [34.05, -118.24], // Initial map center
+      zoom: 11, // Initial zoom level
+      attributionControl: false, // Instead of default attribution, we add custom at the bottom of script
+      scrollWheelZoom: true, // Enable scroll wheel zoom
+      dragging: true // Enable click and drag camera movement
+    });
+  
+    // Add baselayer
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19
+    }).addTo(map);
+  
+    // Add geolocation button to top-right corner of map
+    var geolocationButton = document.getElementById('geolocation-button');
+    geolocationButton.style.position = 'absolute';
+    geolocationButton.style.bottom = '10px';
+    geolocationButton.style.right = '10px';
+    map.getContainer().appendChild(geolocationButton);
+  
+// Add a click event listener to the geolocation button
+geolocationButton.addEventListener('click', function() {
+  // Get the user's location using the geolocation API
+  navigator.geolocation.getCurrentPosition(function(position) {
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
 
-  <form id="crime-report-form" method="post" action="submit.php">
-    <label for="crime-type">Crime Type:</label>
-    <input type="text" id="crime-type" name="crime-type" required />
+    // Update the map's center with the user's coordinates
+    map.setView([lat, lng], 15);
 
-    <label for="description">Description:</label>
-    <textarea id="description" name="description" required></textarea>
+    // Add a marker to the map at the user's location
+    var marker = L.marker([lat, lng]).addTo(map);
 
-    <label for="time">Time:</label>
-    <input type="datetime-local" id="time" name="time" required></input>
+    // Update the marker's position as the user moves
+    navigator.geolocation.watchPosition(function(position) {
+      var lat = position.coords.latitude;
+      var lng = position.coords.longitude;
 
-    <label for="location">Location:</label>
-    <input type="text" id="location" name="location" required />
-  </form>
-
-    <script>
-      var map = L.map('map', {
-        center: [34.05, -118.24], // Initial map center
-        zoom: 11, // Initial zoom level
-        attributionControl: false, // Instead of default attribution, we add custom at the bottom of script
-        scrollWheelZoom: true, // Enable scroll wheel zoom
-        dragging: true // Enable click and drag camera movement
-      });
-    
-      // Add baselayer
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd',
-        maxZoom: 19
-      }).addTo(map);
-    
-      // Add geolocation button to top-right corner of map
-      var geolocationButton = document.createElement('button');
-      geolocationButton.id = 'geolocation-button';
-      geolocationButton.textContent = 'Get Current Location';
-      geolocationButton.style.position = 'absolute';
-      geolocationButton.style.bottom = '10px';
-      geolocationButton.style.right = '10px';
-      map.getContainer().appendChild(geolocationButton);
-    
-      geolocationButton.addEventListener('click', function() {
-        if (!navigator.geolocation) {
-          alert('Geolocation is not supported by your browser');
-        } else {
-          navigator.geolocation.getCurrentPosition(success, error);
-        }
-      });
-    
-      function success(position) {
-        var latitude  = position.coords.latitude;
-        var longitude = position.coords.longitude;
-    
-        var marker = L.marker([latitude, longitude], {
-          icon: L.icon({
-            iconUrl: 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png',
-            iconSize: [32, 32],
-            iconAnchor: [16, 32]
-          })
-        }).addTo(map);
-
-        // Add geographical labels only layer on top of baselayer
+      marker.setLatLng([lat, lng]);
+    });
+  }, function(error) {
+    // Handle any errors that occur
+    console.error(error);
+  });
+});
+    // Add geographical labels only layer on top of baselayer
     var labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
       subdomains: 'abcd',
@@ -91,49 +87,91 @@
       pane: 'shadowPane'  // always display on top
     }).addTo(map)
 
-    
-        marker.bindPopup(
-          <form method="post" action="submit.php">
-            <label for="crime-type">Crime Type:</label>
-            <input type="text" id="crime-type" name="crime-type" required />
-    
-            <label for="description">Description:</label>
-            <textarea id="description" name="description" required></textarea>
-    
-            <label for="time">Time:</label>
-            <input type="datetime-local" id="time" name="time" required></input>
-    
-            <label for="location">Location:</label>
-            <input type="text" id="location" name="location" value="${latitude}, ${longitude}" readonly />
-
 
     
-            <button type="submit">Submit</button>
-          </form>
-        ).openPopup();
-    
-        marker.on('popupopen', function() {
-          var form = document.querySelector('.leaflet-popup-content form');
-          form.addEventListener('submit', function(event) {
-            event.preventDefault();
-    
-            var crimeType = document.getElementById('crime-type').value;
-            var description = document.getElementById('description').value;
-            var time = document.getElementById('time').value;
-            var location = document.getElementById('location').value;
-    
-            // Send crime report to server
-            // ...
-    
-            alert('Crime reported successfully!');
-            map.closePopup();
-          });
-        });
-      }
-    
-      function error() {
-        alert('Unable to retrieve your location');
-      }
+    map.on('click', function(e) {
+  var marker = L.marker(e.latlng).addTo(map);
+  marker.bindPopup(`
+    <form id="crime-form">
+      <label for="crime-type">Crime Type:</label>
+      <input type="text" id="crime-type" name="crime-type" required>
+
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" required></textarea>
+
+      <label for="time">Time:</label>
+      <input type="datetime-local" id="time" name="time" required>
+
+      <label for="location">Location:</label>
+      <input type="text" id="location" name="location" value="${e.latlng.lat}, ${e.latlng.lng}" readonly>
+
+      <button type="submit">Submit</button>
+    </form>
+  `).openPopup();
+
+  var form = document.getElementById('crime-form');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    var crimeType = document.getElementById('crime-type').value;
+    var description = document.getElementById('description').value;
+    var time = document.getElementById('time').value;
+    var location = document.getElementById('location').value;
+
+    // Send crime report to server
+    fetch('submit_crime_report.php', {
+      method: 'POST',
+      body: JSON.stringify({
+        crimeType: crimeType,
+        description: description,
+        time: time,
+        location: location
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+
+    marker.bindPopup(`
+      <b>${crimeType}</b><br>
+      ${description}<br>
+      ${time}<br>
+      ${location}
+    `).openPopup();
+  });
+
+  marker.on('popupclose', function() {
+    map.removeLayer(marker);
+  });
+});
+// Retrieve crime reports from server
+fetch('get_crime_reports.php')
+  .then(response => response.json())
+  .then(data => {
+    // Create marker for each crime report
+    data.forEach(crimeReport => {
+      var marker = L.marker([crimeReport.latitude, crimeReport.longitude]).addTo(map);
+      marker.bindPopup(`
+        <b>${crimeReport.crimeType}</b><br>
+        ${crimeReport.description}<br>
+        ${crimeReport.time}<br>
+        ${crimeReport.location}
+      `);
+    });
+  })
+  .catch(error => {
+    console.error(error);
+  });
     </script>
+    <style>
+      #geolocation-button {
+    position: absolute;
+    z-index: 9999;
+  }
+   </style>
   </body>
 </html>
