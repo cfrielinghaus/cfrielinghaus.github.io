@@ -1,8 +1,17 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <title>Contact Us</title>
   <link rel="stylesheet" href="Contact Us.css">
+</head>
+<body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
+<title>Form Submit to Send Email</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
   <header>
@@ -20,29 +29,20 @@
         </div>
     </div>      
   </header>
-  <form id="contactForm">
-  <div>
-    <div>
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required>
-      <div id="nameError" class="error"></div>
-    </div>
-    <div>
-  <div>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    <span class="error" id="emailError"></span>
-  </div>
-  <div>
-    <label for="message">Message:</label>
-    <textarea id="message" name="message" required></textarea>
-    <span class="error" id="messageError"></span>
-  </div>
-  <button type="submit">Submit</button>
+  <form target="_blank" action="https://formsubmit.co/cfrielinghaus11@gmail.com" method="POST">
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" required>
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" required>
+    <input type="hidden" name="_next" value="http://127.0.0.1:5500/Thank%20You.html">
+    <label for="subject">Subject</label>
+    <input type="text" name="subject" id="subject" required>
+    <label for="message" name="message">Message</label>
+    <textarea name="message" id="message" required></textarea>
+    <br>
+    <button>Send</button>
 </form>
-
-<div id="errorDiv"></div>
-
+<!--
   <script>
     const form = document.getElementById('contactForm');
 
@@ -99,6 +99,6 @@
         window.location.href = 'Thank You.html';
       }
     });
-  </script>
+  </script> -->
 </body>
 </html>
