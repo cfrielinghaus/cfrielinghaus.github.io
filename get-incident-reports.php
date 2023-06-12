@@ -1,5 +1,5 @@
 <?php
-// Connect to MySQL database
+// Connect to the MySQL database
 $servername = "localhost";
 $username = "username";
 $password = "password";
@@ -7,34 +7,24 @@ $dbname = "myDB";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+// Check connection
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-// Retrieve crime reports from database
-$sql = "SELECT * FROM crime_reports";
+// Retrieve the location data from the MySQL database
+$sql = "SELECT crime_type, description, latitude, longitude FROM crimes";
 $result = $conn->query($sql);
 
-$crimeReports = array();
-
+// Convert the location data to a JSON object
+$data = array();
 if ($result->num_rows > 0) {
-  while ($row = $result->fetch_assoc()) {
-    $crimeReport = array(
-      'id' => $row['id'],
-      'latitude' => $row['latitude'],
-      'longitude' => $row['longitude'],
-      'crimeType' => $row['crime_type'],
-      'description' => $row['description'],
-      'time' => $row['time'],
-      'location' => $row['location']
-    );
-    array_push($crimeReports, $crimeReport);
+  while($row = $result->fetch_assoc()) {
+    $data[] = $row;
   }
 }
+echo json_encode($data);
 
-// Return crime reports as JSON-encoded array
-header('Content-Type: application/json');
-echo json_encode($crimeReports);
-
+// Close the MySQL connection
 $conn->close();
 ?>

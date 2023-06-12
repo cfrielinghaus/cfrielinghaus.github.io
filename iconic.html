@@ -116,8 +116,11 @@ geolocationButton.addEventListener('click', function() {
       <label for="time">Time:</label>
       <input type="datetime-local" id="time" name="time" required>
 
-      <label for="location">Location:</label>
-      <input type="text" id="location" name="location" value="${e.latlng.lat}, ${e.latlng.lng}" readonly>
+      <label for="latitude">Latitude:</label>
+      <input type="text" id="location" name="latitude" value="${e.latlng.lat}" readonly>
+
+      <label for="longitude">Longitude:</label>
+      <input type="text" id="location" name="longitude" value=" ${e.latlng.lng}" readonly>
 
       <button type="submit">Submit</button>
     </form>
@@ -130,7 +133,8 @@ geolocationButton.addEventListener('click', function() {
     var crimeType = document.getElementById('crime-type').value;
     var description = document.getElementById('description').value;
     var time = document.getElementById('time').value;
-    var location = document.getElementById('location').value;
+    var location = document.getElementById('latitude').value;
+    var location = document.getElementById('longitude').value;
 
     // Send crime report to server
     fetch('submit_crime_report.php', {
@@ -139,7 +143,8 @@ geolocationButton.addEventListener('click', function() {
         crimeType: crimeType,
         description: description,
         time: time,
-        location: location
+        latitude: latitude,
+        longitude: longitude
       })
     })
     .then(response => response.json())
@@ -154,7 +159,8 @@ geolocationButton.addEventListener('click', function() {
       <b>${crimeType}</b><br>
       ${description}<br>
       ${time}<br>
-      ${location}
+      ${lat}<br>
+      ${lng}
     `).openPopup();
   });
 
@@ -173,13 +179,31 @@ fetch('get_crime_reports.php')
         <b>${crimeReport.crimeType}</b><br>
         ${crimeReport.description}<br>
         ${crimeReport.time}<br>
-        ${crimeReport.location}
+        ${crimeReport.latitude}<br>
+        ${crimeReport.longitude}
       `);
     });
   })
   .catch(error => {
     console.error(error);
   });
+  // Retrieve the data from the MySQL database
+var xmlhttp = new XMLHttpRequest();
+var url = "get-incident-reports.php";
+
+xmlhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    var data = JSON.parse(this.responseText);
+
+    // Add markers to the map for each location
+    for (var i = 0; i < data.length; i++) {
+      var marker = L.marker([data[i].latitude, data[i].longitude]).addTo(map);
+      marker.bindPopup("<b>" + data[i].crime_type + "</b><br>" + data[i].description);
+    }
+  }
+};
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
     </script>
     <style>
       #geolocation-button {
