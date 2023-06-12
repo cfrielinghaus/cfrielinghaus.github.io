@@ -17,7 +17,21 @@
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
 
 </head>
-
+<header>
+  <div class="banner">
+      <div class="banner-links">
+        <a href="main.html" class="banner-link">HeatMap</a>
+        <a href="iconic.html" class="banner-link">Incident Map</a>
+      </div>
+      <div class="banner-logo">
+        <a href="index.html"><img src="images/logo.png" alt="CrimeEye Logo"></a>
+      </div>
+      <div class="banner-links">
+        <a href="About Us.html" class="banner-link">About Us</a>
+        <a href="Contact Us.html" class="banner-link">Contact Us</a>
+      </div>
+  </div>      
+</header>
 <body class="helvetica">
 
   <div id="map" class="vh-100 vw-100 bg-near-white">
@@ -172,6 +186,39 @@ fetch('get_crime_reports.php')
     position: absolute;
     z-index: 9999;
   }
+  
+.banner {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: linear-gradient(to bottom right, #292d3e, #746fb0);
+  height: 80px;
+}
+
+.banner-logo {
+  display: flex;
+  align-items: center;
+}
+
+.banner-logo img {
+  height: 50px;
+  margin-right: 10px;
+}
+
+.banner-links {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 40%;
+}
+
+.banner-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+}
+
    </style>
   </body>
 </html>

@@ -1,58 +1,100 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Contact Us | CrimeEye</title>
-  <link rel="stylesheet" href="Contact Us.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-     crossorigin=""/>
-    <!-- Make sure you put this AFTER Leaflet's CSS -->
-  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-  integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-  crossorigin=""></script> 
-  <style>
-    #map { height: 100%; }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Crime in Los Angeles – Leaflet Heatmap</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.11.1/tachyons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+
 </head>
-<body>
-  <header>
-    <div class="banner">
-        <div class="banner-links">
-          <a href="main.html" class="banner-link">Map</a>
-          <a href="About Us.html" class="banner-link">About Us</a>
-        </div>
-        <div class="banner-logo">
-          <a href="index.html"><img src="images/logo.png" alt="CrimeEye Logo"></a>
-        </div>
-        <div class="banner-links">
-          <a href="#" class="banner-link">Our Mission</a>
-          <a href="Contact Us.html" class="banner-link">Contact Us</a>
-        </div>
-    </div>      
-  </header>
-  <div id='map'>
+<header>
+  <div class="banner">
+      <div class="banner-links">
+        <a href="main.html" class="banner-link">HeatMap</a>
+        <a href="iconic.html" class="banner-link">Incident Map</a>
+      </div>
+      <div class="banner-logo">
+        <a href="index.html"><img src="images/logo.png" alt="CrimeEye Logo"></a>
+      </div>
+      <div class="banner-links">
+        <a href="About Us.html" class="banner-link">About Us</a>
+        <a href="Contact Us.html" class="banner-link">Contact Us</a>
+      </div>
+  </div>      
+</header>
+<body class="helvetica">
+
+  <div id="map" class="vh-100 vw-100 bg-near-white">
+    <button id="geolocation-button">Get Current Location</button>
   </div>
+  
+  <div id="legend" class="bg-white fixed bottom-0 left-0 pa2 mt2 ml2 br1 o-90" style="z-index: 999; width: 380px">
+    <h1 class="f3 mt0">Crime in Los Angeles</h1>
+  
+    <p class="measure mb1">
+      This heatmap shows hotspots of crime in Los Angeles
+      from January 2020 - April 2023 according to the Metropolitan Police data.
+    </p>
+  </div>
+  
   <script>
-
     var map = L.map('map', {
-      zoomControl: false, // Add zoom control separately below
       center: [34.05, -118.24], // Initial map center
-      zoom: 10, // Initial zoom level
+      zoom: 11, // Initial zoom level
       attributionControl: false, // Instead of default attribution, we add custom at the bottom of script
-      scrollWheelZoom: false
-    })
-
-    // Add zoom in/out buttons to the top-right
-    L.control.zoom({position: 'topright'}).addTo(map)
-
+      scrollWheelZoom: true, // Enable scroll wheel zoom
+      dragging: true // Enable click and drag camera movement
+    });
+  
     // Add baselayer
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
       subdomains: 'abcd',
       maxZoom: 19
-    }).addTo(map)
+    }).addTo(map);
+  
+    // Add geolocation button to top-right corner of map
+    var geolocationButton = document.getElementById('geolocation-button');
+    geolocationButton.style.position = 'absolute';
+    geolocationButton.style.bottom = '10px';
+    geolocationButton.style.right = '10px';
+    map.getContainer().appendChild(geolocationButton);
+  
+// Add a click event listener to the geolocation button
+geolocationButton.addEventListener('click', function() {
+  // Get the user's location using the geolocation API
+  navigator.geolocation.getCurrentPosition(function(position) {
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
 
+    // Update the map's center with the user's coordinates
+    map.setView([lat, lng], 15);
+
+    // Add a marker to the map at the user's location
+    var marker = L.marker([lat, lng]).addTo(map);
+
+    // Update the marker's position as the user moves
+    navigator.geolocation.watchPosition(function(position) {
+      var lat = position.coords.latitude;
+      var lng = position.coords.longitude;
+
+      marker.setLatLng([lat, lng]);
+    });
+  }, function(error) {
+    // Handle any errors that occur
+    console.error(error);
+  });
+});
     // Add geographical labels only layer on top of baselayer
     var labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
@@ -61,113 +103,103 @@
       pane: 'shadowPane'  // always display on top
     }).addTo(map)
 
-    // Read data from CSV file
-    $.get('./data/data.csv', function(csvString) {
+// Create a heatmap layer for each crime type
+var batteryHeatmap = L.heatLayer([], { radius: 10, gradient: { 0.2: 'blue', 0.4: 'cyan', 1: '#fff' } });
+var vandalismHeatmap = L.heatLayer([], { radius: 10, gradient: { 0.4: 'green', 0.6: 'yellow', 1: 'white' } });
+var burglaryHeatmap = L.heatLayer([], { radius: 10, gradient: { 0.4: 'red', 0.6: 'orange', 1: 'white' } });
+var theftHeatmap = L.heatLayer([], { radius: 10, gradient: { 0.4: 'purple', 0.6: 'pink', 1: 'white' } });
+var identityTheftHeatmap = L.heatLayer([], { radius: 10, gradient: { 0.4: 'black', 0.6: 'gray', 1: 'white' } });
+var vehicleTheftHeatmap = L.heatLayer([], { radius: 10, gradient: { 0.4: 'brown', 0.6: 'tan', 1: 'white' } });
 
-      // Use PapaParse to transform file into arrays
-      var data = Papa.parse(csvString.trim()).data.filter(
-        function(row) { return row.length === 2 }
-      ).map(function(a) {
-        return [ parseFloat(a[0]), parseFloat(a[1]) ]
-      })
+// Parse the CSV file and add the data points to the appropriate layer group
+Papa.parse('./data/data.csv', {
+  header: true,
+  download: true,
+  dynamicTyping: true,
+  complete: function(results) {
+    var batteryCount = 0;
+    var vandalismCount = 0;
+    var burglaryCount = 0;
+    var theftCount = 0;
+    var identityTheftCount = 0;
+    var vehicleTheftCount = 0;
 
-      // Add all points into a heat layer
-      var heat = L.heatLayer(data, {
-        radius: 5,
-        blur: 8,
-      })
+    results.data.forEach(function(d) {
+      var lat = d.latitude;
+      var lng = d.longitude;
+      var type = d.type;
 
-      // Add the heatlayer to the map
-      heat.addTo(map)
-
-      // Define a function to update the heatmap layer with new data
-      function updateHeatmap(columnIndex) {
-        var newDataPoints = []; // Initialize empty array for new data points
-        for (var i = 0; i < data.length; i++) {
-          newDataPoints.push([data[i][0], data[i][columnIndex]]); // Extract the lat/long and column value for the selected column
-        }
-        heat.setLatLngs(newDataPoints); // Update the heatmap layer with the new data points
+      if (type === "BATTERY - SIMPLE ASSAULT") {
+        batteryHeatmap.addLatLng([lat, lng]);
+      } else if (type === "VANDALISM - FELONY (>$400)") {
+        vandalismHeatmap.addLatLng([lat, lng]);
+      } else if (type === "BURGLARY FROM VEHICLE") {
+        burglaryHeatmap.addLatLng([lat, lng]);
+      } else if (type === "BURGLARY") {
+        theftHeatmap.addLatLng([lat, lng]);
+      } else if (type === "THEFT OF IDENTITY") {
+        identityTheftHeatmap.addLatLng([lat, lng]);
+      } else if (type === "VEHICLE - STOLEN") {
+        vehicleTheftHeatmap.addLatLng([lat, lng]);
       }
-
-      // Add a UI element to let the user toggle between different columns
-      var columnSelect = document.getElementById('column-select');
-      columnSelect.addEventListener('change', function() {
-        var columnIndex = parseInt(this.value); // Get the index of the selected column
-        updateHeatmap(columnIndex); // Update the heatmap layer with the selected column
-      });
-
-    })
-
-    // Add custom attribution
-    L.control.attribution({
-      prefix: '<a href="https://github.com/HandsOnDataViz/leaflet-heatmap">View data and code</a> \
-        by <a href="https://handsondataviz.org" target="_blank">HandsOnDataViz</a>'
-    }).addTo(map)
-
-    // Get a reference to the incident report form
-var incidentForm = document.getElementById('incident-form');
-
-// Add an event listener to the map that listens for a click event
-map.on('click', function(e) {
-  // Get the latitude and longitude of the click location
-  var lat = e.latlng.lat;
-  var lng = e.latlng.lng;
-
-  // Populate the location field of the incident report form with the latitude and longitude values
-  incidentForm.location.value = lat + ', ' + lng;
-
-  // Display the incident report form to the user
-  incidentForm.style.display = 'block';
-});
-
-// Add an event listener to the incident report form that listens for a submit event
-incidentForm.addEventListener('submit', function(e) {
-  // Prevent the default form submission behavior
-  e.preventDefault();
-
-// Create an empty layer group for the incident report markers
-var incidentMarkers = L.layerGroup().addTo(map);
-
-// Make an AJAX request to retrieve the incident report data from the server-side script
-var xhr = new XMLHttpRequest();
-xhr.open('GET', '/get-incident-reports.php');
-xhr.onload = function() {
-  if (xhr.status === 200) {
-    // The request was successful, so parse the JSON response and create markers for each incident report
-    var incidentReports = JSON.parse(xhr.responseText);
-    for (var i = 0; i < incidentReports.length; i++) {
-      var incidentReport = incidentReports[i];
-
-      // Create a marker for the incident report and add it to the incidentMarkers layer group
-      var marker = L.marker([incidentReport.latitude, incidentReport.longitude]).addTo(incidentMarkers);
-
-      // Add a popup to the marker with the incident report details
-      marker.bindPopup('<b>Incident:</b> ' + incidentReport.incident + '<br><b>Description:</b> ' + incidentReport.description + '<br><b>Time:</b> ' + incidentReport.time);
-    }
-  } else {
-    // The request failed, so display an error message to the user
-    alert('An error occurred while retrieving the incident reports. Please try again later.');
+    });
   }
-};
-xhr.send();
-
-  // Get the form data
-  var formData = new FormData(incidentForm);
-
-  // Send the form data to the server-side script using an HTTP request
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', '/process-incident-report.php');
-  xhr.onload = function() {
-    if (xhr.status === 200) {
-      // The request was successful, so hide the incident report form from the user
-      incidentForm.style.display = 'none';
-    } else {
-      // The request failed, so display an error message to the user
-      alert('An error occurred while processing your incident report. Please try again later.');
-    }
-  };
-  xhr.send(formData);
 });
+
+// Add the heatmap layers to the map
+var overlayMaps = {
+  "Battery - Simple Assault": batteryHeatmap,
+  "Vandalism - Felony (>$400)": vandalismHeatmap,
+  "Burglary from Vehicle": burglaryHeatmap,
+  "Theft": theftHeatmap,
+  "Theft of Identity": identityTheftHeatmap,
+  "Vehicle - Stolen": vehicleTheftHeatmap
+};
+L.control.layers(null, overlayMaps).addTo(map);
+
+// Add the Fullscreen control to the map
+map.addControl(new L.Control.Fullscreen());
+
   </script>
+ <style>
+    #geolocation-button {
+  position: absolute;
+  z-index: 9999;
+}
+
+.banner {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: linear-gradient(to bottom right, #292d3e, #746fb0);
+  height: 80px;
+}
+
+.banner-logo {
+  display: flex;
+  align-items: center;
+}
+
+.banner-logo img {
+  height: 50px;
+  margin-right: 10px;
+}
+
+.banner-links {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 40%;
+}
+
+.banner-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+ </style>
 </body>
+
 </html>
